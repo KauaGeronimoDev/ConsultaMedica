@@ -1,0 +1,6 @@
+@WOS_Doctor_HostAddress = http://localhost:5237
+
+GET {{WOS_Doctor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
