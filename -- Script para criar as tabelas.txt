@@ -1,0 +1,69 @@
+create database bd_clinicaKauaAntony
+
+-- Script para criar as tabelas
+CREATE TABLE Medicos (
+    MedicosID INT PRIMARY KEY,
+    Nome VARCHAR(100)
+);
+
+CREATE TABLE Especialidades (
+    EspecialidadeID INT PRIMARY KEY,
+    Nome VARCHAR(100)
+);
+
+CREATE TABLE Consultas (
+    ConsultaID INT PRIMARY KEY,
+    MedicoID INT,
+    EspecialidadeID INT,
+    PacienteID INT,
+    Procedimento VARCHAR(100),
+    DataConsulta DATE,
+    FOREIGN KEY (MedicoID) REFERENCES Medicos(MedicosID),
+    FOREIGN KEY (EspecialidadeID) REFERENCES Especialidades(EspecialidadeID),
+	FOREIGN KEY (PacienteID) REFERENCES Pacientes(PacienteID)
+);
+
+CREATE TABLE Pacientes (
+    PacienteID INT PRIMARY KEY,
+    Nome VARCHAR(100)
+);
+
+CREATE TABLE Medicamentos (
+    MedicamentoID INT PRIMARY KEY,
+    ConsultaID INT,
+    NomeMedicamento VARCHAR(100),
+    Dosagem VARCHAR(50),
+    FOREIGN KEY (ConsultaID) REFERENCES Consultas(ConsultaID)
+);
+
+-- Script para popular as tabelas com pelo menos 3 itens cada
+INSERT INTO Medicos (MedicosID, Nome) VALUES
+(1, 'Dr. José'),
+(2, 'Dra. Ana'),
+(3, 'Dr. Carlos');
+
+INSERT INTO Especialidades (EspecialidadeID, Nome) VALUES
+(1, 'Cardiologia'),
+(2, 'Dermatologia'),
+(3, 'Pediatria');
+
+INSERT INTO Consultas (ConsultaID, MedicoID, EspecialidadeID, PacienteID, Procedimento, DataConsulta) VALUES
+(1, 1, 1, 1, 'Exame de Rotina', '2024-05-01'),
+(2, 2, 2, 2, 'Consulta de Acne', '2024-05-05'),
+(3, 3, 3, 3, 'Avaliação do Desenvolvimento', '2024-05-10');
+
+INSERT INTO Pacientes (PacienteID, Nome) VALUES
+(1, 'Maria'),
+(2, 'João'),
+(3, 'Ana');
+
+INSERT INTO Medicamentos (MedicamentoID, ConsultaID, NomeMedicamento, Dosagem) VALUES
+(1, 1, 'Aspirina', '500mg'),
+(2, 2, 'Creme para Acne', 'Aplicar na área afetada'),
+(3, 3, 'Vitamina D', '1 comprimido por dia');
+
+select * from Medicos ;
+select * from Especialidades ;
+select * from Consultas ;
+select * from Pacientes ;
+select * from Medicamentos ;
